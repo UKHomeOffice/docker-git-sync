@@ -14,3 +14,16 @@ pipeline:
     when:
       branch: master
       event: push
+
+  tagged_image_to_quay:
+    image: quay.io/ukhomeofficedigital/drone-docker
+    secrets:
+      - docker_password
+    environment:
+      - DOCKER_USERNAME=ukhomeofficedigital+git_sync
+    registry: quay.io
+    repo: quay.io/ukhomeofficedigital/git-sync
+    tags:
+      - ${DRONE_TAG}
+    when:
+      event: tag
