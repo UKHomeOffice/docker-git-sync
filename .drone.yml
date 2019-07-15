@@ -1,14 +1,16 @@
-image_to_quay:
-  image: quay.io/ukhomeofficedigital/drone-docker
-  secrets:
-    - docker_password
-  environment:
-    - DOCKER_USERNAME=ukhomeofficedigital+git_sync
-  registry: quay.io
-  repo: quay.io/ukhomeofficedigital/git-sync
-  tags:
-    - ${DRONE_COMMIT_SHA}
-    - latest
-  when:
-    branch: master
-    event: push
+pipeline:
+
+  image_to_quay:
+    image: quay.io/ukhomeofficedigital/drone-docker
+    secrets:
+      - docker_password
+    environment:
+      - DOCKER_USERNAME=ukhomeofficedigital+git_sync
+    registry: quay.io
+    repo: quay.io/ukhomeofficedigital/git-sync
+    tags:
+      - ${DRONE_COMMIT_SHA}
+      - latest
+    when:
+      branch: master
+      event: push
